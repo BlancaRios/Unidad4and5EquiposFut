@@ -1,0 +1,82 @@
+﻿@model Unidad4and5EquiposFut.Models.Equipo
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{
+    ViewData["Title"] = "VerInformacionEquipo";
+    Layout = "_Layout";
+}
+
+<body>
+
+    <section id="cuerpodedatosdeequipo">
+        <h1 style="color:white;width:100%;background-color: #3c83bc " id="tituloh1infoequipo">
+            Acerca de @Model.Nombre
+        </h1>
+        <a href="javascript:window.history.back()" style=" line-height: 20px; width: 60px; height: 25px; display: block; text-align: center; text-decoration: none; background-color: #3c83bc; color: white; padding: 5px; border: 1px solid black; float: right;margin-right:5px ">
+            Regresar
+        </a>
+        @if (System.IO.File.Exists($"{env.WebRootPath}/imgs_equipos/{@Model.Id}_e.jpg"))
+        {
+            <img id="fotito" src="~/imgs_equipos/@(Model.Id)_e.jpg" alt="@(Model.Nombre)" />
+        }
+        else
+        {
+            <img id="fotito" src="~/imgs/EquipoNoEncontrado.png" />
+        }
+        @*<img id="fotito" src="~/imgs_equipos/@(Model.Id)_e.png" alt="@(Model.Nombre)" />*@
+        <div id="datosequipo">
+
+            <h2>Nombre: <b>@Model.Nombre</b></h2>
+            <h2>País: <b>@Model.Pais</b></h2>
+            <p>@Model.Descripcion</p>
+
+
+        </div>
+
+
+        @if (Model.Integrantes.Count() != 0)
+        {
+            <div  style="margin-top:525px" class="listaT">
+
+                <h1 style="color:white; background-color: #3c83bc " id="titulointegrantes">Integrantes 👤</h1>
+                @foreach (var item in Model.Integrantes)
+                {
+                    <ul class="list">
+
+
+                        <li>
+
+                            <h2 style="color:black" id="NCamiseta">@item.Nombre</h2>
+
+
+                            <a href="~/integrante/informacion/@item.Nombre.Replace(" ","-")">
+
+                                @if (System.IO.File.Exists($"{env.WebRootPath}/imgs_integrantes/{item.Id}_i.jpg"))
+                                {
+                                <img src="~/imgs_integrantes/@(item.Id)_i.jpg" />
+                                }
+                                else
+                                {
+                                  <img src="~/imgs/IntegranteNoEncontrado.png" />
+                                }
+
+                                @*<img src="~/imgs_integrantes/@(item.Id)_i.png" />*@
+
+                            </a>
+                            @*<h2 style="color:black" id="Posicion">@item.Pais</h2>*@
+
+
+
+                        </li>
+                    </ul>
+
+                }
+
+            </div>
+        }
+       
+    </section>
+
+</body>
+
+
