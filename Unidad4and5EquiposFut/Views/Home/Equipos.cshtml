@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Unidad4and5EquiposFut.Models.Equipo>
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{
+    ViewData["Title"] = "Equipos";
+    Layout = "_Layout";
+}
+@*<title>Inicio | Pixar</title>*@
+<body>
+    <section class="listaT" style="color:white;  background-color: #3c83bc ">
+        <h1 style="color:white">Lista de equipos ⚽</h1>
+        <div class="listaT">
+
+
+            @foreach (var item in Model)
+            {
+                <ul class="list">
+
+
+                    <li>
+
+                        <h2 style="color:black" id="NCamiseta">@item.Nombre</h2>
+
+
+                        <a href="~/equipo/informacion/@item.Nombre.Replace(" ","-")">
+                            @if (System.IO.File.Exists($"{env.WebRootPath}/imgs_equipos/{item.Id}_e.jpg"))
+                            {
+                                <img src="~/imgs_equipos/@(item.Id)_e.jpg" />
+                            }
+                            else
+                            {
+                                <img src="~/imgs/EquipoNoEncontrado.png" />
+                            }
+
+
+                            @*<img src="~/imgs_equipos/@(item.Id)_e.png" />*@
+
+                        </a>
+                        @*<h2 style="color:black" id="Posicion">@item.Pais</h2>*@
+
+
+
+                    </li>
+                </ul>
+
+            }
+
+        </div>
+
+    </section>
+
+</body>

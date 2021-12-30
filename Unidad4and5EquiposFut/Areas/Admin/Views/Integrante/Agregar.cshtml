@@ -1,0 +1,91 @@
+﻿@model Unidad4and5EquiposFut.Areas.Admin.Models.CrudIntegranteViewModel
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment env
+@{ ViewData["Title"] = "Agregar";
+    Layout = "_LayoutAdmin"; }
+
+<div>
+    <form style="margin:10px;width:100%" method="post" asp-area="Admin" asp-action="Agregar" asp-controller="Integrante" enctype="multipart/form-data">
+        <div id="ElementosAd" style="float: left;width:45%;">
+            <h3>Nuevo integrante</h3>
+            <label>Nombre:</label>
+            <input type="text" asp-for="Integrantes.Nombre" required ><br><br />
+            <label>Género:</label>
+            <input type="text" asp-for="Integrantes.Genero" required><br><br />
+            <label>Edad:</label>
+            <input type="number" min="18" max="50" asp-for="Integrantes.Edad" required><br><br />
+            <label>Número camiseta:</label>
+            <input type="number" min="1" max="11" asp-for="Integrantes.NumCamiseta" required><br><br />
+            <label>Posición:</label>
+            <input type="text" asp-for="Integrantes.Posicion" required><br><br />
+            <label>Estado:</label>
+            <input type="text" asp-for="Integrantes.Estado" required><br><br />
+            <label>Aceleración:</label>
+            <input type="number" min="1" max="10" asp-for="Integrantes.Aceleracion" required><br><br />
+            <label>Agilidad:</label>
+            <input type="number" min="1" max="10" asp-for="Integrantes.Agilidad" required><br><br />
+            <label>Salto:</label>
+            <input type="number" min="1" max="10" asp-for="Integrantes.Salto" required><br><br />
+            <label>Contról de balón:</label>
+            <input type="number" min="1" max="10" asp-for="Integrantes.ControlDeBalon" required><br><br />
+            <label>Ofensividad:</label>
+            <input type="number" min="1" max="10" asp-for="Integrantes.Ofensividad" required><br><br />
+            <label>Curva:</label>
+            <input type="number" min="1" max="10" asp-for="Integrantes.Curva" required><br><br />
+            <label>Fuerza:</label>
+            <input type="number" min="1" max="10" asp-for="Integrantes.Fuerza" required><br><br />
+            <label>Salario:</label>
+            <input type="number" min="1" asp-for="Integrantes.Salario" required><br><br />
+            <label>Equipo:</label>
+            <select required asp-for="Integrantes.IdEquipo" asp-items="@(new SelectList(Model.Equipos, "Id", "Nombre"))">
+                <option selected value="">Selecciona un equipo</option>
+            </select><br><br>
+           
+
+                
+
+         
+        </div>
+        <div style="margin-top:25px;width:45%; margin-left:50px; float:left">
+            <img style="width:300px  ;height:300px;" id="imagePreview" src="~/imgs/IntegranteNoEncontrado.png" alt="Vista previa de la imagen"><br />
+            <input type="file" id="fileImage" name="foto" accept="image/jpeg"><br />
+           
+        </div>
+        <div style="float:left">
+            <input type="submit" style="background-color: #3c83bc; color: white; padding: 5px;  width:100px;margin-top:100px;  " value="Agregar">
+
+
+            <a href="javascript:window.history.back()" style=" line-height: 18px; width: 100px; height: 18px; display: block; text-align: center; text-decoration: none; background-color: #3c83bc; color: white; padding: 5px; border: 1px solid black; float: right; margin-top:100px; margin-left:20px ">
+                Regresar
+            </a>
+            <p style="color:red">
+
+                @Html.ValidationSummary()
+            </p>
+        </div>
+
+    </form>
+</div>
+
+
+
+
+<br class="clear" />
+
+<script>
+    function mostrarImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('#imagePreview').src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.querySelector("#fileImage").addEventListener("change", event => {
+        mostrarImagen(event.target)
+    });</script>
+
+
+
